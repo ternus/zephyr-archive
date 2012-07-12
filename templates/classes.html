@@ -1,0 +1,11 @@
+<html>
+<head>
+</head>
+<body>
+<ul>
+{% for c in classes %}
+<li><a href="/{{ c.name }}/">{{ c.name }}</a></li>
+{% endfor %}
+</ul>
+</body>
+</html>

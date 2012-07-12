@@ -1,0 +1,11 @@
+<html>
+<head>
+</head>
+<body>
+<table>
+{% for z in zephyrs %}
+<tr><td>{{ z.sender }}</td><td>{{ z.class }}</td><td>{{ z.instance }}</td><td>{{ z.message }}</td></tr>
+{% endfor %}
+</table>
+</body>
+</html>
