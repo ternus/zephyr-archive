@@ -61,16 +61,29 @@ def create_tables():
 
 @zarchive.route('/')
 def all_classes():
-    classes = ZClass.select().order_by(('name', 'asc')).annotate(Zephyr).order_by(('count', 'desc'))
-    users = ZUser.select().order_by(('name', 'asc')).annotate(Zephyr).order_by(('count', 'desc'))
+    classes = ZClass.select().order_by(('name', 'asc')).annotate(Zephyr).order_by(('count', 'desc')).annotate(Zephyr, Max('time', 'max_time'))
+    users = ZUser.select().order_by(('name', 'asc')).annotate(Zephyr).order_by(('count', 'desc')).annotate(Zephyr, Max('time', 'max_time'))
     return render_template('classes.html', classes=classes, users=users)
 
 @zarchive.route('/class/<cls>')
 def zclass(cls):
     page = int(request.args.get('page', 1))
     per_page = int(request.args.get('per_page', 100))
-    zephyrs = Zephyr.filter(zclass=cls).order_by(('time', 'desc')).paginate(page, per_page)
-    return render_template('zephyrs.html', zephyrs=zephyrs)
+    startdate = request.args.get('startdate')
+    enddate = request.args.get('enddate')
+    zephyrs = Zephyr.filter(zclass=cls)
+    if startdate:
+        try:
+            zephyrs = zephyrs.filter(time>=startdate)
+        except:
+            pass
+    if enddate:
+        try:
+            zephyrs = zephyrs.filter(time<=enddate)
+        except:
+            pass
+    zephyrs = zephyrs.order_by(('time', 'desc')).paginate(page, per_page).reverse()
+    return render_template('zephyrs.html', zephyrs=zephyrs, page=page, per_page=per_page)
 
 # TODO Refactor this into something sensible.
 

@@ -5,7 +5,7 @@
 <body>
 <table>
 {% for z in zephyrs %}
-<tr><td>{{ z.time }}</td><td>{{ z.sender.name }}</td><td>{{ z.zclass.name }}</td><td>{% if z.instance|lower != 'personal' %}{{ z.instance|escape }}{% endif %}</td><td><pre>{{ z.message|urlize|escape }}</pre></td></tr>
+<tr><td><a name="{{ z.uid }}">{{ z.time }}</a></td><td>{{ z.sender.name }}</td><td>{{ z.zclass.name }}</td><td>{% if z.instance|lower != 'personal' %}{{ z.instance|escape }}{% endif %}</td><td><pre>{{ z.message|urlize|escape }}</pre></td></tr>
 {% endfor %}
 </table>
 </body>
