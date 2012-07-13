@@ -1,6 +1,7 @@
 from flask import *
 # flask-peewee bindings
 from flask_peewee.db import Database
+from peewee import *
 import os
 import zephyr
 
