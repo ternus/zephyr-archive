@@ -1,10 +1,11 @@
 <html>
 <head>
+  <link rel="stylesheet" href="/static/master.css" />
 </head>
 <body>
-<table border=1>
+<table>
 {% for z in zephyrs %}
-<tr><td>{{ z.time }}</td><td>{{ z.sender.name }}</td><td>{{ z.zclass.name }}</td><td>{{ z.instance|escape }}</td><td><pre>{{ z.message|urlize|escape }}</pre></td></tr>
+<tr><td>{{ z.time }}</td><td>{{ z.sender.name }}</td><td>{{ z.zclass.name }}</td><td>{% if z.instance|lower != 'personal' %}{{ z.instance|escape }}{% endif %}</td><td><pre>{{ z.message|urlize|escape }}</pre></td></tr>
 {% endfor %}
 </table>
 </body>
