@@ -1,7 +1,9 @@
 from flask import *
 # flask-peewee bindings
 from flask_peewee.db import Database
+from peewee import VarCharColumn
 from peewee import *
+import datetime
 import os
 import zephyr
 
@@ -103,7 +105,6 @@ def listen_for_zephyrs():
                 subs.add((z.name, '*', '*'))
             print "Got %s new subs" % (ZClass.select().count() - count)
             count = ZClass.select().count()
-
         
         if PROMISCUOUS_MODE:
             # New person?  Subscribe to their personal class.
