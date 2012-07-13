@@ -4,7 +4,12 @@
 <body>
 <ul>
 {% for c in classes %}
-<li><a href="/{{ c.name }}">{{ c.name }}</a></li>
+<li><a href="/class/{{ c.name }}">{{ c.name }}</a> ({{ c.count }})</li>
+{% endfor %}
+</ul>
+<ul>
+{% for u in users %}
+<li><a href="/user/{{ u.name }}">{{ u.name }}</a> ({{ u.count }})</li>
 {% endfor %}
 </ul>
 </body>

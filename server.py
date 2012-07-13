@@ -12,7 +12,7 @@ PROMISCUOUS_MODE = True # Otherwise known as 'goodell mode.'
                         # Subscribe to the classes of everyone we see.
 # configure our database
 DATABASE = 'example.db'
-DEBUG = False
+DEBUG = True
 
 zarchive = Flask(__name__)
 zarchive.config.from_object(__name__)
@@ -59,15 +59,25 @@ def create_tables():
     Zephyr.create_table(fail_silently=True)
 
 @zarchive.route('/')
-def hello_world():
-    classes = ZClass.select().order_by(('name', 'asc'))
-    return render_template('classes.html', classes=classes)
+def all_classes():
+    classes = ZClass.select().order_by(('name', 'asc')).join(Zephyr, 'left outer').annotate(Zephyr).order_by(('count', 'desc'))
+    users = ZUser.select().order_by(('name', 'asc')).join(Zephyr, 'left outer').annotate(Zephyr).order_by(('count', 'desc'))
+    return render_template('classes.html', classes=classes, users=users)
 
-@zarchive.route('/<cls>')
+@zarchive.route('/class/<cls>')
 def zclass(cls):
     page = int(request.args.get('page', 1))
     per_page = int(request.args.get('per_page', 100))
     zephyrs = Zephyr.filter(zclass=cls).order_by(('time', 'desc')).paginate(page, per_page)
+    return render_template('zephyrs.html', zephyrs=zephyrs)
+
+# TODO Refactor this into something sensible.
+
+@zarchive.route('/user/<user>')
+def zuser(user):
+    page = int(request.args.get('page', 1))
+    per_page = int(request.args.get('per_page', 100))
+    zephyrs = Zephyr.filter(sender=user).order_by(('time', 'desc')).paginate(page, per_page)
     return render_template('zephyrs.html', zephyrs=zephyrs)
 
 @zarchive.route('/sub/<cls>')
