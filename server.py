@@ -60,8 +60,8 @@ def create_tables():
 
 @zarchive.route('/')
 def all_classes():
-    classes = ZClass.select().order_by(('name', 'asc')).join(Zephyr, 'left outer').annotate(Zephyr).order_by(('count', 'desc'))
-    users = ZUser.select().order_by(('name', 'asc')).join(Zephyr, 'left outer').annotate(Zephyr).order_by(('count', 'desc'))
+    classes = ZClass.select().order_by(('name', 'asc')).annotate(Zephyr).order_by(('count', 'desc'))
+    users = ZUser.select().order_by(('name', 'asc')).annotate(Zephyr).order_by(('count', 'desc'))
     return render_template('classes.html', classes=classes, users=users)
 
 @zarchive.route('/class/<cls>')
