@@ -85,6 +85,7 @@ def listen_for_zephyrs():
     print "Listening for zephyrs (%s current subs)..." % count
     while True:
         nz = zephyr.receive(block=True)
+        if nz.cls.lower() == 'message' and nz.instance.lower() == 'personal': continue
         try:
             sender = nz.sender.replace("@ATHENA.MIT.EDU", "")
             print "New zephyr to -c %s from %s" % (nz.cls, sender)
