@@ -4,7 +4,7 @@
 <body>
 <table border=1>
 {% for z in zephyrs %}
-<tr><td>{{ z.time }}</td><td>{{ z.sender.name }}</td><td>{{ z.zclass.name }}</td><td>{{ z.instance }}</td><td><pre>{{ z.message }}</pre></td></tr>
+<tr><td>{{ z.time }}</td><td>{{ z.sender.name }}</td><td>{{ z.zclass.name }}</td><td>{{ z.instance|escape }}</td><td><pre>{{ z.message|urlize|escape }}</pre></td></tr>
 {% endfor %}
 </table>
 </body>
