@@ -114,6 +114,8 @@ def listen_for_zephyrs():
                 message = nz.fields[1])
 
             # Check to see if we've added subs out-of-band.
+            # XXX This won't take effect until the next time we
+            # XXX receive a zephyr.
             if ZClass.select().count() != count:
                 for z in ZClass.select():
                     subs.add((z.name, '*', '*'))

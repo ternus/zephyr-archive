@@ -1,0 +1,49 @@
+body {
+
+    font-family: Helvetica, Verdana, Sans-serif;
+    font-size: 12pt;
+
+    background: #ddd;
+}
+
+
+.hidden {
+    display: none;
+}
+
+a {
+    color: #336699;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000066;
+    text-decoration: underline;
+}
+
+
+li {
+    margin-bottom: .5em;
+}
+
+
+#page-container {
+    width: 870px;
+    margin: auto;
+    padding: 10px;
+
+}
+
+table {
+    border: 0px;
+    border-spacing: 0px;
+}
+
+td {
+
+    padding: 5px;
+
+}
+
+tr:nth-child(odd)    { background-color:#eee; }
+tr:nth-child(even)    { background-color:#fff; }
