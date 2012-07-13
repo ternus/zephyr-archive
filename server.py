@@ -6,13 +6,14 @@ from peewee import *
 import datetime
 import os
 import zephyr
-
+DEBUG = False
 SECRET_KEY = 'sekrit keeey'
 PROMISCUOUS_MODE = True # Otherwise known as 'goodell mode.'  
                         # Subscribe to the classes of everyone we see.
 # configure our database
 DATABASE = 'example.db'
-DEBUG = True
+
+from localsettings import *
 
 zarchive = Flask(__name__)
 zarchive.config.from_object(__name__)
