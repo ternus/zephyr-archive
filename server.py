@@ -92,6 +92,8 @@ def listen_for_zephyrs():
     subs = zephyr.Subscriptions()
     for z in ZClass.select():
         subs.add((z.name, '*', '*'))
+        subs.add(('un%s' % z.name, '*', '*'))
+        subs.add(('unun%s' % z.name, '*', '*'))
     count = ZClass.select().count()
     print "Listening for zephyrs (%s current subs)..." % count
     while True:
@@ -119,6 +121,7 @@ def listen_for_zephyrs():
             if ZClass.select().count() != count:
                 for z in ZClass.select():
                     subs.add((z.name, '*', '*'))
+                    subs.add(('un%s ' % z.name, '*', '*'))
                 print "Got %s new subs" % (ZClass.select().count() - count)
                 count = ZClass.select().count()
 
