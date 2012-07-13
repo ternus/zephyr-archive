@@ -12,7 +12,7 @@
 <h2>Users</h2>
 <ul>
 {% for u in users %}
-<li><a href="/user/{{ u.name }}?latest={{ c.max_time }}">{{ u.name }}</a> ({{ u.count }})</li>
+<li><a href="/user/{{ u.name }}?latest={{ u.max_time }}">{{ u.name }}</a> ({{ u.count }})</li>
 {% endfor %}
 </ul>
 </body>

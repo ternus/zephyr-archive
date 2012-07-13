@@ -62,7 +62,7 @@ def create_tables():
 @zarchive.route('/')
 def all_classes():
     classes = ZClass.select().order_by(('name', 'asc')).annotate(Zephyr).order_by(('count', 'desc')).annotate(Zephyr, Max('time', 'max_time'))
-    users = ZUser.select().order_by(('name', 'asc')).annotate(Zephyr).order_by(('count', 'desc')).annotate(Zephyr, Max('time', 'max_time'))
+    users = ZUser.select().order_by(('name', 'asc')).annotate(Zephyr).order_by(('count', 'desc'))
     return render_template('classes.html', classes=classes, users=users)
 
 @zarchive.route('/class/<cls>')
@@ -82,7 +82,7 @@ def zclass(cls):
             zephyrs = zephyrs.filter(time<=enddate)
         except:
             pass
-    zephyrs = zephyrs.order_by(('time', 'desc')).paginate(page, per_page).reverse()
+    zephyrs = zephyrs.order_by(('time', 'desc')).paginate(page, per_page)
     return render_template('zephyrs.html', zephyrs=zephyrs, page=page, per_page=per_page)
 
 # TODO Refactor this into something sensible.
