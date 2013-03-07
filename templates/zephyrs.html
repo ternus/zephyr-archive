@@ -8,5 +8,6 @@
 <tr><td><a name="{{ z.uid }}" href="/class/{{ z.zclass.name }}#{{ z.uid }}">{{ z.time }}</a></td><td>{{ z.sender.name }}</td><td>{{ z.zclass.name }}</td><td>{% if z.instance|lower != 'personal' %}{{ z.instance|escape }}{% endif %}</td><td><pre>{{ z.message|urlize|escape }}</pre></td></tr>
 {% endfor %}
 </table>
+<a name="latest">&nbsp;</a>
 </body>
 </html>

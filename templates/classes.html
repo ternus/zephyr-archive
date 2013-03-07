@@ -3,13 +3,17 @@
 </head>
 <body>
 <h1>The Zephyr Archive</h1>
+<p>Last zephyr: {{ last }}</p>
+
 <h2>Classes</h2>
+<h3>{{ classes.count() }} active classes</h3>
 <ul>
 {% for c in classes %}
-<li><a href="/class/{{ c.name }}?latest={{ c.max_time }}">{{ c.name }}</a> ({{ c.count }})</li>
+<li><a href="/class/{{ c.name }}#{{ c.max_id }}">{{ c.name }}</a> ({{ c.count }})</li>
 {% endfor %}
 </ul>
 <h2>Users</h2>
+<h3>{{ users.count() }} active users</h3>
 <ul>
 {% for u in users %}
 <li><a href="/user/{{ u.name }}?latest={{ u.max_time }}">{{ u.name }}</a> ({{ u.count }})</li>
